@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Bu skript 1-dən 10-a qədər dövr edir və:
+#  - 4-cü dövrədə "bad luck"
+#  - 8-ci dövrədə "good luck"
+#  - digərlərində "Best School" göstərir
+
+count=1
+while [ $count -le 10 ]
+do
+  if [ $count -eq 4 ]
+  then
+    echo "bad luck"
+  elif [ $count -eq 8 ]
+  then
+    echo "good luck"
+  else
+    echo "Best School"
+  fi
+  ((count++))
+done
+
