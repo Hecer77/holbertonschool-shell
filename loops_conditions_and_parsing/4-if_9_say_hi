@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Bu skript "Best School" sözünü 10 dəfə göstərir, lakin 9-cu dəfə "Best School" və sonra "Hi" yazır
+
+count=1
+while [ $count -le 10 ]
+do
+  if [ $count -eq 9 ]
+  then
+    echo "Best School"
+    echo "Hi"
+  else
+    echo "Best School"
+  fi
+  ((count++))
+done
