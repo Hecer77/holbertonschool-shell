@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Bu skript cari kataloqun içərisindəki faylları listə şəkildə göstərir
+# Yalnız ilk tire ( - ) sonrası hissəni göstərir və gizli fayllar göstərilmir
+
+for file in *; do
+  # Faylın adı tire işarəsindən sonra hissəsini göstərmək üçün cut istifadə edirik
+  echo "$file" | cut -d'-' -f2-
+done
