@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
+# Bu skript saatı 12 saata qədər göstərir və hər saat üçün 1-dən 59-a qədər dəqiqələri göstərir
+
 hour=0
 while [ $hour -le 12 ]
 do
-echo "Hour: $hour"
-minute=1
-while [ $minute -le 59 ]
-do
- echo $minute
- ((minute++))
+  echo "Hour: $hour"
+  minute=1
+  while [ $minute -le 59 ]
+  do
+    echo $minute
+    ((minute++))
+  done
+  ((hour++))
 done
-((hour++))
-done
+                                                                                                       7-clock                                                                                                                            
+
