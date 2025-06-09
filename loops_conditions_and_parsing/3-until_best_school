@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Bu skript "Best School" sözünü 10 dəfə göstərir, until dövrəsindən istifadə edərək
+
+count=1
+until [ $count -gt 10 ]
+do
+  echo "Best School"
+  ((count++))
+done
