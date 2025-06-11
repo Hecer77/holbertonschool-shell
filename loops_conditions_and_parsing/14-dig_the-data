@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-awk '{ print $1 " " $9}' apache-access.log | uniq -c | sort -rn 
+awk '{ print $1 " " $9}' apache-access.log | sort |  uniq -c | sort -rn 
 
 
 
