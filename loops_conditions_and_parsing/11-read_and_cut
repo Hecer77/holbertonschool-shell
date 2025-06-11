@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
-while IFS=: read -r username _ userid _ _ home _; do
-  echo "${username}:${userid}:${home}"
+# Bu skript /etc/passwd faylını oxuyur və istifadəçi adı, UID və ev qovluğunu çıxarır
+
+while IFS=: read -r username _ uid _ _ home _; do
+    echo "$username:$uid:$home"
 done < /etc/passwd
+
