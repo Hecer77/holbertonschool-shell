@@ -1,31 +1,6 @@
 #!/usr/bin/env bash
-# Apache log faylını oxuyub IP və HTTP status kodlarına görə sayları göstərir.
-# for, while, until və cut istifadə olunmur. Yalnız awk istifadə olunur.
-# Log faylı "apache-access.log" adlandırılıb.
-
-LOG_FILE="apache-access.log"
-
-if [[ ! -f "$LOG_FILE" ]]; then
-    echo "Error: $LOG_FILE tapılmadı" >&2
-    exit 1
-fi
-
-awk '
-# Sətirin ən az 9 sütunu var və 9-cu sütun tam rəqəmdirsə, say
-NF >= 9 && $9 ~ /^[0-9]+$/ {
-    counts[$1, $9]++
-}
-END {
-    if (length(counts) == 0) {
-        # Heç bir düzgün formatlı sətir yoxdursa, boş çıxış ver
-        exit
-    }
-    for (key in counts) {
-        split(key, arr, SUBSEP)
-        print counts[key], arr[1], arr[2]
-    }
-}
-' "$LOG_FILE" | sort -rn
+#
+awk '{ print $1 " " $9}' apache-access.log | uniq -c | sort -rn 
 
 
 
