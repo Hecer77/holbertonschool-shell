@@ -1,27 +1,31 @@
 #!/usr/bin/env bash
-# Skript apache-access.log faylını oxuyur, IP və HTTP status kodlarının sayını tapır
-# və sayına görə azalan sırada göstərir.
-# for, while, until, cut istifadə edilmir. Yalnız awk və sort istifadə olunur.
+# Apache log faylını oxuyub IP və HTTP status kodlarına görə sayları göstərir.
+# for, while, until və cut istifadə olunmur. Yalnız awk istifadə olunur.
+# Log faylı "apache-access.log" adlandırılıb.
 
 LOG_FILE="apache-access.log"
 
-# Fayl yoxlanışı
 if [[ ! -f "$LOG_FILE" ]]; then
-    echo "Error: Log faylı tapılmadı" >&2
+    echo "Error: $LOG_FILE tapılmadı" >&2
     exit 1
 fi
 
 awk '
-    # Hər sətri yoxla, ən azı 9 sütun olmalıdır (IP 1-ci, status kod 9-cu sütun)
-    NF >= 9 && $9 ~ /^[0-9]+$/ {
-        count[$1,$9]++
+# Sətirin ən az 9 sütunu var və 9-cu sütun tam rəqəmdirsə, say
+NF >= 9 && $9 ~ /^[0-9]+$/ {
+    counts[$1, $9]++
+}
+END {
+    if (length(counts) == 0) {
+        # Heç bir düzgün formatlı sətir yoxdursa, boş çıxış ver
+        exit
     }
-    END {
-        for (key in count) {
-            split(key, arr, SUBSEP)
-            print count[key], arr[1], arr[2]
-        }
+    for (key in counts) {
+        split(key, arr, SUBSEP)
+        print counts[key], arr[1], arr[2]
     }
+}
 ' "$LOG_FILE" | sort -rn
+
 
 
