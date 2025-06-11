@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+while IFS=: read -r username _ userid _ _ home _; do
+  echo "${username}:${userid}:${home}"
+done < /etc/passwd
