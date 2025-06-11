@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
-# Apache logundan IP və HTTP status kodlarını oxuyub qruplaşdıran skript
+# Apache log faylından IP və HTTP status kodlarının sayını hesablayır və azalan sıralayır
 
-awk '{count[$1" "$9]++} END {for (i in count) print count[i], i}' apache-access.log | sort -nr
+awk '{count[$1,$9]++} END {
+    for (key in count) {
+        split(key, arr, SUBSEP)
+        print count[key], arr[1], arr[2]
+    }
+}' apache-access.log | sort -rn
+
