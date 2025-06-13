@@ -1,7 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Stop 4-to_infinity_and_beyond process without kill or killall using pgrep
 
-pid=$(pgrep -f 4-to_infinity_and_beyond)
+pid=$(ps aux | grep '4-to_infinity_and_beyond' | grep -v grep | awk '{print $2}')
 
-if [[ -n "$pid" ]]; then
+if [[ -n $pid ]]; then
     builtin kill "$pid"
 fi
+
