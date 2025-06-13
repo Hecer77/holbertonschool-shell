@@ -1,0 +1,10 @@
+#!/bin/bash
+# 5-dont_stop_me_now
+
+# Get the PID(s) of 4-to_infinity_and_beyond process(es)
+pids=$(pgrep -f 4-to_infinity_and_beyond)
+
+# If any PID found, kill them
+if [ -n "$pids" ]; then
+  kill $pids
+fi
