@@ -14,4 +14,3 @@ for pid in /proc/[0-9]*; do
         fi
     fi
 done
-
