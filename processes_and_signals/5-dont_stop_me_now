@@ -1,10 +1,12 @@
-#!/bin/bash
-# 5-dont_stop_me_now
+#!/usr/bin/env bash
+# This script kills the 4-to_infinity_and_beyond process
 
-# Get the PID(s) of 4-to_infinity_and_beyond process(es)
-pids=$(pgrep -f 4-to_infinity_and_beyond)
+for pid in /proc/[0-9]*; do
+  if [ -r "$pid/cmdline" ]; then
+    cmd=$(tr '\0' ' ' < "$pid/cmdline")
+    if [[ "$cmd" == *4-to_infinity_and_beyond* ]]; then
+      kill "$(basename "$pid")"
+    fi
+  fi
+done
 
-# If any PID found, kill them
-if [ -n "$pids" ]; then
-  kill $pids
-fi
