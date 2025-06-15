@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Prints a message every 2 seconds; prints a special message on SIGTERM without stopping
+
+trap 'echo "I am invincible!!!"' SIGTERM
+
+while true; do
+  echo "To infinity and beyond"
+  sleep 2
+done
